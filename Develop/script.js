@@ -1,13 +1,9 @@
 //  declare the universal veriables 
 
 
-study how to use moment 
-study how to use jQuery to create the planner 
-study how to create the storage function and save it
-study how to pull the data from the saved storage 
 
 
-creation a function to save the text input in to the stoage and another function to pull the data
+// creation a function to save the text input in to the stoage and another function to pull the data
 
 // render function
 
@@ -46,3 +42,53 @@ function setPlanner() {
                 $(this).children(".description").val(schedule);
             }
         });
+
+    }
+    setPlanner();
+    
+
+
+
+// study how to use moment 
+// study how to use jQuery to create the planner 
+// study how to create the storage function and save it
+// study how to pull the data from the saved storage 
+
+
+    // Saves to localStorage:
+    var saveBtn = $(".saveBtn");
+        
+    
+    saveBtn.on("click", function () {
+        var time = $(this).parent().attr("id");
+        var schedule = $(this).siblings(".description").val().trim();
+        
+        localStorage.setItem("time", JSON.stringify(time));
+        localStorage.setItem("schedule", JSON.stringify(schedule));
+    
+        localStorage.getItem("time");
+        localStorage.getItem("schedule");
+    });
+    
+    // Function for changing from past to present to future on the grid:
+    function pastPresentFuture() {
+        hour = time.hours();
+        $(".time-block").each(function () {
+            var thisHour = parseInt($(this).attr("data-time"));
+    
+            if (thisHour > hour) {
+                $(this).addClass("future")
+            }
+            else if (thisHour === hour) {
+                $(this).addClass("present");
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+            }
+            else {
+                $(this).addClass("past");
+                $(this).removeClass("future");
+            }
+        })
+    }
+    
+    pastPresentFuture();

@@ -1,0 +1,48 @@
+//  declare the universal veriables 
+
+
+study how to use moment 
+study how to use jQuery to create the planner 
+study how to create the storage function and save it
+study how to pull the data from the saved storage 
+
+
+creation a function to save the text input in to the stoage and another function to pull the data
+
+// render function
+
+// storage function 
+
+
+// Time function 
+
+// Set data attributes to each hour input element so that the function below can assign a color to each row based on the current hour
+$("#hour-9").attr("data-time", moment("9:00 am", "h:mm a").format("HH"));
+$("#hour-10").attr("data-time", moment("10:00 am", "hh:mm a").format("HH"));
+$("#hour-11").attr("data-time", moment("11:00 am", "hh:mm a").format("HH"));
+$("#hour-12").attr("data-time", moment("12:00 pm", "hh:mm a").format("HH"));
+$("#hour-13").attr("data-time", moment("1:00 pm", "h:mm a").format("HH"));
+$("#hour-14").attr("data-time", moment("2:00 pm", "h:mm a").format("HH"));
+$("#hour-15").attr("data-time", moment("3:00 pm", "h:mm a").format("HH"));
+$("#hour-16").attr("data-time", moment("4:00 pm", "h:mm a").format("HH"));
+$("#hour-17").attr("data-time", moment("5:00 pm", "h:mm a").format("HH"));
+
+
+
+
+var time = moment();
+
+// Function to set and enter text into the grid:
+function setPlanner() {
+    // Date function from moment.js:
+    $("#currentDay").text(moment().format("dddd, MMMM Do"));
+
+    // To retrieve the schedule-field text from localStorage:
+        $(".time-block").each(function () {
+            var id = $(this).attr("id");
+            var schedule = JSON.parse(localStorage.getItem("schedule"));
+    
+            if (schedule !== null) {
+                $(this).children(".description").val(schedule);
+            }
+        });

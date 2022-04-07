@@ -21,7 +21,7 @@ $("#hour-13").attr("data-time", moment("1:00 pm", "h:mm a").format("HH"));
 $("#hour-14").attr("data-time", moment("2:00 pm", "h:mm a").format("HH"));
 $("#hour-15").attr("data-time", moment("3:00 pm", "h:mm a").format("HH"));
 $("#hour-16").attr("data-time", moment("4:00 pm", "h:mm a").format("HH"));
-$("#hour-17").attr("data-time", moment("5:00 pm", "h:mm a").format("HH"));
+$("#4pm").attr("data-time", moment("5:00 pm", "h:mm a").format("HH"));
 
 
 
@@ -36,7 +36,7 @@ function setPlanner() {
     // To retrieve the schedule-field text from localStorage:
         $(".time-block").each(function () {
             var id = $(this).attr("id");
-            var schedule = JSON.parse(localStorage.getItem("schedule"));
+            var schedule = localStorage.getItem(id);
     
             if (schedule !== null) {
                 $(this).children(".description").val(schedule);
@@ -45,7 +45,14 @@ function setPlanner() {
 
     }
     setPlanner();
-    
+    // =================================================
+
+    $('#9am .description').val(localStorage.getItem("9am"));
+
+
+
+
+
 
 
 
@@ -56,19 +63,47 @@ function setPlanner() {
 
 
     // Saves to localStorage:
-    var saveBtn = $(".saveBtn");
+    // var saveBtn = $(".saveBtn");
         
     
-    saveBtn.on("click", function () {
+    // saveBtn.on("click", function () {
+    //     var time = $(this).parent().attr("id");
+    //     var schedule = $(this).siblings(".description").val().trim();
+        
+    //     localStorage.setItem("time", JSON.stringify(time));
+    //     localStorage.setItem("schedule", JSON.stringify(schedule));
+    
+    //     localStorage.getItem("time");
+    //     localStorage.getItem("schedule");
+    // });
+
+
+// Local Storage 
+    var saveBtn = $(".saveBtn")
+
+    saveBtn.on("click", function() {
+        console.log($(this).parent().attr("id"));
+
+        // we want to get the time 
         var time = $(this).parent().attr("id");
-        var schedule = $(this).siblings(".description").val().trim();
-        
-        localStorage.setItem("time", JSON.stringify(time));
-        localStorage.setItem("schedule", JSON.stringify(schedule));
-    
-        localStorage.getItem("time");
-        localStorage.getItem("schedule");
-    });
+
+
+
+        // we're trying to get the text content here . Stacking methods 
+        console.log($(this).siblings(".description").val())
+        var description = $(this).siblings(".description").val();
+
+        // saving to local storage==== set item takes key and value 
+        localStorage.setItem(time, description);
+
+    })
+
+
+        // to display the info on the screen when we open the page, use get item
+
+
+
+
     
     // Function for changing from past to present to future on the grid:
     function pastPresentFuture() {
